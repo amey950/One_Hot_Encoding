@@ -1,0 +1,63 @@
+id | Gender |
+101  |  Male   |
+202  |  Female |
+303  |  Male   |
+404  |  Male   |
+505  | Female  |
+606  | Female    |
+-----------------
+
+Here we have replace Gender column's string data type with numerical column , but not simply 1 or 2
+
+modified table will look like this
+
+id | gender      |  Male  |  Female
+101   male            1         0
+202  female          0         1
+303   male           1         0
+404   male           1         0
+505  female          0         1
+606   female         0         1
+
+THIS CAN BE DONE BY FOLLOWING PIECE OF CODE
+
+SELECT *,
+CASE WHEN GENDER = 'Male' THEN 1 ELSE 0 END AS MALE,
+CASE WHEN GENDER = 'Female' THEN 1 ELSE 0 END AS Female
+from TABLE_NAME
+
+WE CAN CREATE NEW TABLE FROM ABOVE CODE NOT INCLUDING GENDER IN STRING COLUMN.
+
+NOTE : IF THE CATEGORICAL COLUMNS HAD 4 DISTINCT VALUES THEN WE WOULD HAVE FORCED TO WRITE 4 CASE WHEN STATEMENTS
+BUT IN THE ABOVE EXAMPLE WE HAVE ONLY 2 DISTINCT VALUES FOR GENDER WHICH IS MALE AND FEMALE, WE ARE WRITING 
+ONLY 2 CASE-WHEN STATEMENTS
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+HERE POSTING ANOTHER EXAMPLE : 
+
+S_ID | ADDRESS
+101   |  NY
+202   |  WASHINGTON
+303   |  NY
+404   | VIRGINIA
+505   | CHICAGO
+
+HERE WE HAVE 4 DISTINCT VALUES IN ADDRESS (NY , WASHINGTON , VIRGINIA , CHICAGO)
+
+THE "ONE HOT ENCODING" METHOD CODE HERE WILL BE
+
+SELECT *,
+CASE WHEN ADDRESS = 'NY' THEN 1 ELSE 0 END AS ADDRESS_NY,
+CASE WHEN ADDRESS = 'WASHINGTON' THEN 1 ELSE 0 END AS ADDRESS_WASHINGTON,
+CASE WHEN ADDRESS = 'VIRGINIA' THEN 1 ELSE 0 END AS ADDRESS_VIRGINIA,
+CASE WHEN ADDRESS = 'CHICAGO' THEN 1 ELSE 0 END AS ADDRESS_CHICAGO
+FROM TABLE ;
+
+OUTPUT WILL BE LIKE :
+
+S_ID | ADDRESS       | ADDRESS_NY   |  ADDRESS_WASHINGTON | ADDRESS_VIRGINIA | ADDRESS_CHICAGO |
+101   |  NY          | 1             |     0              |     0             |     0           |
+202   |  WASHINGTON  | 0            |      1               |     0            |      0          |
+303   |  NY          | 1             |     0               |     0            |     0            |
+404   | VIRGINIA     | 0             |     0               |      1           |      0           |
+505   | CHICAGO      | 0             |     0               |      0            |     1            |
