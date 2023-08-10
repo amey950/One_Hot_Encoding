@@ -1,0 +1,24 @@
+Here I will give you basic info about technique which is very important for creation of Machine learning models
+
+As we know that there are 2 type of data:
+1) Numerical data
+2) categorical data
+
+Numerical data means columns which has pure numbers. examples include weight , height , salary etc
+Categorical data means columns which creates division amonng data , most of the times these are non numerica data
+examples include gender , address , favourite food , political party you voted for etc.
+
+Categorical data do not needs to be altered while performing data analysis as BI tools like power bi or Tableau
+can handle it preety well , but when we try to use that data in machine learning algorithms, it creates problem
+as ML algorithms can only understand numbers and not string
+
+so fine then , we can replace replace genders with 0 and 1 for male and female. but that too will not work
+as replaceing "male" and "female" with 0 and 1 will create errord in ML algorithms as 1 is greater tha 0 means females 
+are superior than male, which is absolutely not that case. In the context of database we are trating both genders as same.
+by the way replacing categorical columns with 0/1 would have worked in case of reviews columns
+i.e. replacing excellent with 1 and bad with 0 as their is inherent hierarchy in review column data
+
+so here we will have to do something else, for using dataset with categorical columns for ML algo.
+and hence One Hot Encoding method coms to play.
+
+direct implementation of one hot encoding is in next script of same repo.
